@@ -1,0 +1,74 @@
+.home-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  padding: 4rem;
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0.5rem 0 0.2rem 0;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Tables details (Experience, Skills, Languages) */
+.details-block {
+  margin-bottom: 4rem;
+}
+
+.details-block h2 {
+  margin-bottom: 1.5rem;
+}
+
+.details-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.details-table th {
+  text-align: left;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--subtext-color);
+  font-weight: 500;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.details-table td {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: top;
+}
+
+.details-table tr:last-child td {
+  border-bottom: none;
+}
+
+.align-right {
+  text-align: right !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .home-container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}

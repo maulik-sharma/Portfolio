@@ -1,0 +1,25 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --border-color: #111111;
+  --subtext-color: #666666;
+  --button-hover: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+  --bg-color: #111111;
+  --text-color: #ffffff;
+  --border-color: #444444;
+  --subtext-color: #aaaaaa;
+  --button-hover: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  font-family: manrope, sans-serif;
+}

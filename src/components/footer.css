@@ -1,0 +1,26 @@
+.footer {
+    /* margin: 0 20% 0 0; */
+    margin-left: 3%;
+    display: flex;
+    padding-bottom: 5vh;
+    /* justify-content: space-evenly; */
+    /* background-color: aqua; */
+    /* align-items: flex-end; */
+}
+
+.footer-item {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.footer h2 {
+    font-size: 2.3rem;
+    font-weight: normal;
+}
+
+.footer-item div {
+    display: flex;
+    font-size: 1.2rem;
+    justify-content: space-between;
+}
