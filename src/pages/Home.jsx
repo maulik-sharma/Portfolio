@@ -1,4 +1,32 @@
+import { motion } from "framer-motion";
 import "./Home.css";
+
+const sectionVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: .5, ease: "easeOut" } 
+  }
+};
+
+const tableVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const rowVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.4, ease: "easeOut" } 
+  }
+};
 
 export default function Home() {
   return (
@@ -10,7 +38,13 @@ export default function Home() {
       </section>
 
       {/* Row 1, Col 2: My Monthly Favorites */}
-      <section className="grid-item about-section">
+      <motion.section 
+        className="grid-item about-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
         <p>
           I am an Industrial Design graduate from Eindhoven University of
           Technology. Here, I have mostly focused on the improving the UI/UX of
@@ -20,7 +54,7 @@ export default function Home() {
           my background in Industrial Design, I bring a fresh, user-focused
           perspective to web design.
         </p>
-        </section>
+      </motion.section>
 
       {/* Row 2, Col 1: Achievements */}
       <section className="grid-item achievements-section">
@@ -30,79 +64,101 @@ export default function Home() {
       {/* Row 2, Col 2: Details Context (Experience, Skills, Languages) */}
       <section className="grid-item details-section">
         <div className="details-block">
+          
           <h2>Experience</h2>
-          <table className="details-table">
-            <thead>
-              <tr>
+
+          <motion.table 
+            className="details-table"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={tableVariants}
+          >
+            <motion.thead variants={tableVariants}>
+              <motion.tr variants={rowVariants}>
                 <th>WHAT</th>
                 <th>WHERE</th>
                 <th className="align-right">WHEN</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
+              </motion.tr>
+            </motion.thead>
+            <motion.tbody variants={tableVariants}>
+              <motion.tr variants={rowVariants}>
                 <td>Design Engineer</td>
                 <td>35®</td>
                 <td className="align-right">2024 - Now</td>
-              </tr>
-              <tr>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
                 <td>Master of Industrial Design</td>
                 <td>Eindhoven University of Technology</td>
                 <td className="align-right">2021 - 2024</td>
-              </tr>
-              <tr>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
                 <td>Founder Rootnote</td>
                 <td>Self</td>
                 <td className="align-right">2021 - Now</td>
-              </tr>
-              <tr>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
                 <td>Bachelor of Industrial Design</td>
                 <td>Eindhoven University of Technology</td>
                 <td className="align-right">2018 - 2021</td>
-              </tr>
-            </tbody>
-          </table>
+              </motion.tr>
+            </motion.tbody>
+          </motion.table>
         </div>
 
         <div className="details-block">
+          
           <h2>Skills</h2>
-          <table className="details-table">
-            <thead>
-              <tr>
+          <motion.table 
+            className="details-table"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={tableVariants}
+            >
+
+            <motion.thead variants={tableVariants}>
+              <motion.tr variants={rowVariants}>
                 <th>CATEGORY</th>
                 <th className="align-right">TECHNOLOGIES</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
+              </motion.tr>
+            </motion.thead>
+            <motion.tbody variants={tableVariants}>
+              <motion.tr variants={rowVariants}>
                 <td>Frontend</td>
                 <td className="align-right">Vue, Astro, Javascript, HTML, CSS, Three.js, Pixi.js, WEBGL</td>
-              </tr>
-              <tr>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
                 <td>Backend</td>
                 <td className="align-right">Python, Django, Postgres, Redis, Laravel, PHP, Typescript</td>
-              </tr>
-            </tbody>
-          </table>
+              </motion.tr>
+            </motion.tbody>
+          </motion.table>
         </div>
 
         <div className="details-block">
           <h2>Languages</h2>
-          <table className="details-table">
-            <thead>
-              <tr>
+
+          <motion.table className="details-table"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={tableVariants}
+          >
+            <motion.thead variants={tableVariants}>
+              <motion.tr variants={rowVariants}>
                 <th>LANGUAGE</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
+              </motion.tr>
+            </motion.thead>
+            <motion.tbody variants={tableVariants}>
+              <motion.tr variants={rowVariants}>
                 <td>English</td>
-              </tr>
-              <tr>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
                 <td>Dutch</td>
-              </tr>
-            </tbody>
-          </table>
+              </motion.tr>
+            </motion.tbody>
+          </motion.table>
         </div>
       </section>
     </div>

@@ -49,10 +49,7 @@
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.theme-toggle:hover {
-    background-color: var(--button-hover);
-    transform: scale(1.05);
-}
+
 
 .theme-toggle svg {
     width: 24px;
