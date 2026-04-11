@@ -298,7 +298,7 @@ function MorphingModel({ isNavHovered }) {
 
     // Interpolate wiper and morph
     currentWiperY.current += (targetWiperY.current - currentWiperY.current) * delta * 3.0;
-    currentMorph.current += (1.0 - currentMorph.current) * delta * 10.0;
+    currentMorph.current += (1.0 - currentMorph.current) * delta * 7.0;
 
     solidPlane.constant = -currentWiperY.current;
     pointsPlane.constant = currentWiperY.current;
