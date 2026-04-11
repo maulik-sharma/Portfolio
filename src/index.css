@@ -23,3 +23,9 @@ body {
 #root {
   font-family: manrope, sans-serif;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

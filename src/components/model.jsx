@@ -14,7 +14,7 @@ function AnimatedBackgroundText({ isNavHovered }) {
   }, [location.pathname]);
 
   const [theme, setTheme] = React.useState(document.documentElement.getAttribute('data-theme') || 'dark');
-  
+
   useEffect(() => {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -39,21 +39,21 @@ function AnimatedBackgroundText({ isNavHovered }) {
   const longText = textContent.repeat(100);
 
   useEffect(() => {
-     if (textRef1.current) textRef1.current.position.x = 0;
-     if (textRef2.current) textRef2.current.position.x = 0;
+    if (textRef1.current) textRef1.current.position.x = 0;
+    if (textRef2.current) textRef2.current.position.x = 0;
   }, [routeIndex]);
 
   const currentOpacity = useRef(0.15);
 
   useFrame((state, delta) => {
-     if (textRef1.current) textRef1.current.position.x -= delta * 0.5;
-     if (textRef2.current) textRef2.current.position.x += delta * 0.5;
+    if (textRef1.current) textRef1.current.position.x -= delta * 0.5;
+    if (textRef2.current) textRef2.current.position.x += delta * 0.5;
 
-     const targetOpacity = isNavHovered ? 0.00 : 0.15;
-     currentOpacity.current += (targetOpacity - currentOpacity.current) * delta * 10.0;
-     
-     if (textRef1.current) textRef1.current.fillOpacity = currentOpacity.current;
-     if (textRef2.current) textRef2.current.fillOpacity = currentOpacity.current;
+    const targetOpacity = isNavHovered ? 0.00 : 0.15;
+    currentOpacity.current += (targetOpacity - currentOpacity.current) * delta * 10.0;
+
+    if (textRef1.current) textRef1.current.fillOpacity = currentOpacity.current;
+    if (textRef2.current) textRef2.current.fillOpacity = currentOpacity.current;
   });
 
   const fontUrl = "https://raw.githubusercontent.com/google/fonts/main/ofl/anton/Anton-Regular.ttf";
@@ -61,28 +61,28 @@ function AnimatedBackgroundText({ isNavHovered }) {
 
   return (
     <group position={[0, 0, -3]}>
-      <Text 
-        ref={textRef1} 
-        position={[0, 1.2, 0]} 
-        fontSize={2} 
+      <Text
+        ref={textRef1}
+        position={[0, 1.2, 0]}
+        fontSize={2}
         font={fontUrl}
-        color={textColor} 
-        fillOpacity={0.15} 
-        anchorX="center" 
+        color={textColor}
+        fillOpacity={0.15}
+        anchorX="center"
         anchorY="middle"
         material-transparent={true}
         material-depthWrite={false}
       >
         {longText}
       </Text>
-      <Text 
-        ref={textRef2} 
-        position={[0, -1.2, 0]} 
-        fontSize={2} 
+      <Text
+        ref={textRef2}
+        position={[0, -1.2, 0]}
+        fontSize={2}
         font={fontUrl}
-        color={textColor} 
-        fillOpacity={0.15} 
-        anchorX="center" 
+        color={textColor}
+        fillOpacity={0.15}
+        anchorX="center"
         anchorY="middle"
         material-transparent={true}
         material-depthWrite={false}
@@ -106,7 +106,7 @@ function MorphingModel({ isNavHovered }) {
   const { scene: adamRaw } = useGLTF("/adamHead/adamHead.gltf");
   const { scene: tankRaw } = useGLTF("/small_lpg_tank_2k.gltf/small_lpg_tank_2k.gltf");
   const { scene: lampRaw } = useGLTF("/industrial_pipe_lamp_2k.gltf/industrial_pipe_lamp_2k.gltf");
-  
+
   const modelRef = useRef();
 
   // Create clipping planes in world space
@@ -125,7 +125,7 @@ function MorphingModel({ isNavHovered }) {
       const center = box.getCenter(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
       const scale = 2 / maxDim;
-      
+
       modelScene.scale.set(scale, scale, scale);
       modelScene.position.sub(center.multiplyScalar(scale));
       modelScene.updateMatrixWorld(true);
@@ -206,12 +206,12 @@ function MorphingModel({ isNavHovered }) {
       clippingPlanes: [pointsPlane],
       clipIntersection: false,
     });
-    
+
     pointsMat.onBeforeCompile = (shader) => {
       shader.uniforms.morphProgress = { value: 0 };
       shader.uniforms.sourceIndex = { value: 0 };
       shader.uniforms.targetIndex = { value: 0 };
-      
+
       shader.vertexShader = `
         uniform float morphProgress;
         uniform int sourceIndex;
@@ -246,28 +246,46 @@ function MorphingModel({ isNavHovered }) {
     tSolid.visible = false;
     lSolid.visible = false;
 
-    return { 
-      solids: [aSolid, tSolid, lSolid], 
-      pointsScene: pScene, 
-      pMat: pointsMat 
+    return {
+      solids: [aSolid, tSolid, lSolid],
+      pointsScene: pScene,
+      pMat: pointsMat
     };
   }, [adamRaw, tankRaw, lampRaw, solidPlane, pointsPlane]);
 
   const targetWiperY = useRef(5);
+  const isTransitioning = useRef(false);
+  const isNavHoveredRef = useRef(isNavHovered);
+
+  useEffect(() => {
+    isNavHoveredRef.current = isNavHovered;
+  }, [isNavHovered]);
 
   const sourceIndex = useRef(routeIndex);
   const targetIndex = useRef(routeIndex);
   const currentMorph = useRef(1); // Start completed
 
   useEffect(() => {
-    targetWiperY.current = isNavHovered ? 5 : -5;
+    if (!isTransitioning.current) {
+      targetWiperY.current = isNavHovered ? 5 : -5;
+    }
   }, [isNavHovered]);
 
   useEffect(() => {
     if (routeIndex !== targetIndex.current) {
-        sourceIndex.current = targetIndex.current;
-        targetIndex.current = routeIndex;
-        currentMorph.current = 0; // Trigger morph from 0 to 1
+      sourceIndex.current = targetIndex.current;
+      targetIndex.current = routeIndex;
+      currentMorph.current = 0; // Trigger morph from 0 to 1
+
+      isTransitioning.current = true;
+      targetWiperY.current = 5;
+
+      const timer = setTimeout(() => {
+        isTransitioning.current = false;
+        targetWiperY.current = isNavHoveredRef.current ? 5 : -5;
+      }, 1500);
+
+      return () => clearTimeout(timer);
     }
   }, [routeIndex]);
 
@@ -294,10 +312,10 @@ function MorphingModel({ isNavHovered }) {
     // Stealth switch solid models when heavily Wiper-clipped, or immediately if aborting hover
     const isWiperHigh = currentWiperY.current > 4.5;
     const isWiperHeadingDown = targetWiperY.current === -5;
-    
+
     if (isWiperHigh || isWiperHeadingDown) {
       solids.forEach((solid, idx) => {
-         solid.visible = (idx === targetIndex.current);
+        solid.visible = (idx === targetIndex.current);
       });
     }
   });

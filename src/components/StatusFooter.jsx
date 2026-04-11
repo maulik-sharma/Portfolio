@@ -33,7 +33,7 @@ export default function StatusFooter() {
             <div className="status-item right-align">
                 <p className="status-label">LOCATION</p>
                 <div className="status-value">
-                    Maastricht, The Netherlands
+                    Jaipur, India
                 </div>
             </div>
         </div>

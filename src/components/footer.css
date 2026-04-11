@@ -1,6 +1,21 @@
+a.value{
+    color: var(--subtext-color);
+    text-decoration: none;
+
+}
+
+a.label{
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.footer-hr{
+    border-top: 1px solid var(--subtext-color);
+}
 .footer {
     /* margin: 0 20% 0 0; */
     margin-left: 3%;
+    margin-top:2vh;
     display: flex;
     padding-bottom: 5vh;
     /* justify-content: space-evenly; */
@@ -15,7 +30,7 @@
 }
 
 .footer h2 {
-    font-size: 2.3rem;
+    font-size: 3rem;
     font-weight: normal;
 }
 

@@ -5,8 +5,16 @@
   padding: 4rem;
 }
 
+h1 {
+  font-size: 3.5rem;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+
 h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 400;
   margin-top: 0;
   margin-bottom: 2rem;
@@ -63,6 +71,16 @@ p {
 
 .align-right {
   text-align: right !important;
+}
+
+.downloadables{
+  display: flex;
+  justify-content: space-between;
+}
+
+.downloadables a{
+  color: var(--subtext-color);
+  font-size: 1rem;
 }
 
 /* Responsive adjustments */

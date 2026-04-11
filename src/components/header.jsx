@@ -61,8 +61,8 @@ function Header({ setIsNavHovered }) {
                     <motion.li variants={listContainerVariants}>
                         <motion.ul className={`sub-list ${activeIndex === 0 ? '' : 'inactive'}`} variants={listContainerVariants} onMouseEnter={() => navigate('/')}>
                             <h3>Maulik Sharma</h3>
-                            <motion.li variants={itemVariants}>Home</motion.li>
-                            <motion.li variants={itemVariants}>About</motion.li>
+                            <motion.li variants={itemVariants}><a href='/#about'>About</a></motion.li>
+                            <motion.li variants={itemVariants}><a href='/#achievements'>Achievements</a></motion.li>
                         </motion.ul>
                     </motion.li>
 

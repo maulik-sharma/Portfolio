@@ -1,3 +1,14 @@
+.sub-list a{
+    color: inherit;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.sub-list a:hover{
+    text-decoration: underline;
+}
+
+
 .header-nav{
     margin: 0 20% 0 3%;
     /*margin-left: 5%;*/
@@ -44,9 +55,6 @@
     font-size: .9rem;
 }
 
-.sub-list li:hover{
-    cursor: pointer;
-}
 
 .theme-toggle {
     background: none;

@@ -32,8 +32,8 @@ export default function Home() {
   return (
     <div className="home-container">
       {/* Row 1, Col 1: About */}
-      <section className="grid-item about-section">
-        <h2>About</h2>
+      <section className="grid-item about-section" id="about">
+        <h1>About</h1>
 
       </section>
 
@@ -46,23 +46,68 @@ export default function Home() {
         variants={sectionVariants}
       >
         <p>
-          I am an Industrial Design graduate from Eindhoven University of
-          Technology. Here, I have mostly focused on the improving the UI/UX of
-          music listening in social settings. Nowadays, I focus on design
-          engineering websites. Having knowledge of both the frontend and the
-          backend, I am able to craft the experience exactly as desired. Due to
-          my background in Industrial Design, I bring a fresh, user-focused
-          perspective to web design.
+          I am a Computer Science and Engineering developer driven by a 
+          fascination with the inner workings of modern technology, from 
+          low-level systems architecture to the decentralized future of the web. 
+          My technical foundation spans building high-performance C++ HTTP servers 
+          and scalable FastAPI backends to exploring the intersections of Blockchain 
+          and Machine Learning. With a hands-on approach to problem-solving, I have 
+          engineered full-stack financial charting tools, designed dApps, and integrated computer vision for IoT applications like facial 
+          recognition attendance systems. Whether I am optimizing time-series 
+          databases or assembling custom drone hardware, I strive to build 
+          efficient, secure, and impactful technology that bridges the gap between 
+          theoretical computer science and practical, real-world utility.
         </p>
       </motion.section>
 
       {/* Row 2, Col 1: Achievements */}
-      <section className="grid-item achievements-section">
-        <h2>Achievements</h2>
+      <section className="grid-item achievements-section" id="achievements">
+        <h1>Achievements</h1>
       </section>
 
       {/* Row 2, Col 2: Details Context (Experience, Skills, Languages) */}
       <section className="grid-item details-section">
+
+        <div className="details-block">
+          
+          <h2>Education</h2>
+
+          <motion.table 
+            className="details-table"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={tableVariants}
+          >
+            <motion.thead variants={tableVariants}>
+              <motion.tr variants={rowVariants}>
+                <th>WHAT</th>
+                <th>WHERE</th>
+                <th className="align-right">WHEN</th>
+              </motion.tr>
+            </motion.thead>
+            <motion.tbody variants={tableVariants}>
+              <motion.tr variants={rowVariants}>
+                <td>Secondary Education (Class X)</td>
+                <td>St. Teresa’s School, Jaipur</td>
+                <td className="align-right">2021</td>
+              </motion.tr>
+
+              <motion.tr variants={rowVariants}>
+                <td>Senior Secondary Education (Class XII)</td>
+                <td>St. Teresa’s School, Jaipur</td>
+                <td className="align-right">2023</td>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
+                <td>Bachelor of Technology (CSE)</td>
+                <td>JK Lakshmipat University, Jaipur</td>
+                <td className="align-right">2023 - 2027</td>
+              </motion.tr>
+            </motion.tbody>
+          </motion.table>
+        </div>
+
+
         <div className="details-block">
           
           <h2>Experience</h2>
@@ -83,24 +128,20 @@ export default function Home() {
             </motion.thead>
             <motion.tbody variants={tableVariants}>
               <motion.tr variants={rowVariants}>
-                <td>Design Engineer</td>
-                <td>35®</td>
+                <td>Freelancing</td>
+                <td>Self</td>
                 <td className="align-right">2024 - Now</td>
               </motion.tr>
+
               <motion.tr variants={rowVariants}>
-                <td>Master of Industrial Design</td>
-                <td>Eindhoven University of Technology</td>
-                <td className="align-right">2021 - 2024</td>
+                <td>Backend Developer Intern</td>
+                <td>Keystocks OPC Pvt. Ltd.</td>
+                <td className="align-right">2024</td>
               </motion.tr>
               <motion.tr variants={rowVariants}>
-                <td>Founder Rootnote</td>
-                <td>Self</td>
-                <td className="align-right">2021 - Now</td>
-              </motion.tr>
-              <motion.tr variants={rowVariants}>
-                <td>Bachelor of Industrial Design</td>
-                <td>Eindhoven University of Technology</td>
-                <td className="align-right">2018 - 2021</td>
+                <td>Software Development Intern</td>
+                <td>Khandelwal Agrawal & Co.</td>
+                <td className="align-right">2025</td>
               </motion.tr>
             </motion.tbody>
           </motion.table>
@@ -126,11 +167,35 @@ export default function Home() {
             <motion.tbody variants={tableVariants}>
               <motion.tr variants={rowVariants}>
                 <td>Frontend</td>
-                <td className="align-right">Vue, Astro, Javascript, HTML, CSS, Three.js, Pixi.js, WEBGL</td>
+                <td className="align-right">Javascript, HTML, CSS, Three.js, React</td>
               </motion.tr>
               <motion.tr variants={rowVariants}>
                 <td>Backend</td>
-                <td className="align-right">Python, Django, Postgres, Redis, Laravel, PHP, Typescript</td>
+                <td className="align-right">Python, C, C++, FastAPI, Go, Assembly</td>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
+                <td>DevOps</td>
+                <td className="align-right">Git, Docker, AWS, Oracle Cloud, Systems Administration</td>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
+                <td>Databases & Caching</td>
+                <td className="align-right">PostgreSQL, Redis, TimescaleDB, Valkey, MongoDB</td>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
+                <td>AI & Machine Learning</td>
+                <td className="align-right">Machine Learning, Deep Learning, Computer Vision, Agentic AI</td>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
+                <td>Blockchain</td>
+                <td className="align-right">Web3, NFTs, Decentralized Applications</td>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
+                <td>Systems & Networking</td>
+                <td className="align-right">Low-Level Systems Programming, Network Protocols, Socket Programming, Asynchronous Programming</td>
+              </motion.tr>
+              <motion.tr variants={rowVariants}>
+                <td>Hardware & IoT</td>
+                <td className="align-right">Raspberry Pi, Drone Architecture, Hardware Integration</td>
               </motion.tr>
             </motion.tbody>
           </motion.table>
@@ -155,12 +220,18 @@ export default function Home() {
                 <td>English</td>
               </motion.tr>
               <motion.tr variants={rowVariants}>
-                <td>Dutch</td>
+                <td>Hindi</td>
               </motion.tr>
             </motion.tbody>
           </motion.table>
         </div>
+        
+        <div className="downloadables">
+        <a href="/resume" target="_blank">[Resume]</a> 
+        <a href="/cv" target="_blank">[CV]</a>
+      </div>
       </section>
+
     </div>
-  );
+);
 }
