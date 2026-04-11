@@ -1,0 +1,51 @@
+.status-footer {
+    position: fixed;
+    bottom: 1vh;
+    left: 3%;
+    right: 3%;
+    display: flex;
+    justify-content: space-between;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    z-index: 100;
+    pointer-events: none; /* Allows clicks to pass through */
+}
+
+.status-footer.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.status-item.right-align {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.status-label {
+    font-size: 0.70rem;
+    color: var(--subtext-color);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+}
+
+.status-value {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-color);
+}
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #0fdc63; /* Bright green */
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(15, 220, 99, 0.4);
+}

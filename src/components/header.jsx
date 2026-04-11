@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {motion} from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
 import './header.css'
 
 const listContainerVariants = {
@@ -20,8 +21,17 @@ const itemVariants = {
   }
 };
 
-function Header() {
+function Header({ setIsNavHovered }) {
     const [theme, setTheme] = useState('light');
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const getRouteIndex = () => {
+        if (location.pathname.includes('/projects')) return 1;
+        if (location.pathname.includes('/contact')) return 2;
+        return 0;
+    };
+    const activeIndex = getRouteIndex();
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -37,7 +47,10 @@ function Header() {
     };
 
     return (
-        <header className="header">
+        <header className="header"
+            onMouseEnter={() => setIsNavHovered && setIsNavHovered(true)}
+            onMouseLeave={() => setIsNavHovered && setIsNavHovered(false)}
+        >
             <nav className="header-nav">
                 <motion.ul 
                     className="nav-list"
@@ -46,7 +59,7 @@ function Header() {
                     variants={listContainerVariants}
                 >
                     <motion.li variants={listContainerVariants}>
-                        <motion.ul className="sub-list" variants={listContainerVariants}>
+                        <motion.ul className={`sub-list ${activeIndex === 0 ? '' : 'inactive'}`} variants={listContainerVariants} onMouseEnter={() => navigate('/')}>
                             <h3>Maulik Sharma</h3>
                             <motion.li variants={itemVariants}>Home</motion.li>
                             <motion.li variants={itemVariants}>About</motion.li>
@@ -54,7 +67,7 @@ function Header() {
                     </motion.li>
 
                     <motion.li variants={listContainerVariants}>
-                        <motion.ul className="sub-list" variants={listContainerVariants}>
+                        <motion.ul className={`sub-list ${activeIndex === 1 ? '' : 'inactive'}`} variants={listContainerVariants} onMouseEnter={() => navigate('/projects')}>
                             <h3>Projects</h3>
                             <motion.li variants={itemVariants}>Project 1</motion.li>
                             <motion.li variants={itemVariants}>Project 2</motion.li>
@@ -62,7 +75,7 @@ function Header() {
                     </motion.li>
 
                     <motion.li variants={listContainerVariants}>
-                        <motion.ul className="sub-list" variants={listContainerVariants}>
+                        <motion.ul className={`sub-list ${activeIndex === 2 ? '' : 'inactive'}`} variants={listContainerVariants} onMouseEnter={() => navigate('/contact')}>
                             <h3>Contact</h3>
                             <motion.li variants={itemVariants}>Bleh</motion.li>
                             <motion.li variants={itemVariants}>Bleh</motion.li>

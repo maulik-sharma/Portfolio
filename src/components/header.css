@@ -8,7 +8,7 @@
 }
 
 .header{
-    padding: 0 0 1vh 0;
+    padding: 2vh 0 1vh 0;
     margin: 0;
     border-bottom: var(--border-color) solid 1px;
 }
@@ -25,14 +25,23 @@
 .sub-list{
     list-style-type: none;
     padding: 0.2vh;
+    transition: color 0.4s ease;
+}
+
+.sub-list.inactive {
+    color: var(--subtext-color);
 }
 
 .sub-list h3{
     cursor: default;
     font-weight: normal;
     margin-top: 1vh;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-bottom: 0.5vh;
+}
+
+.sub-list li{
+    font-size: .9rem;
 }
 
 .sub-list li:hover{
@@ -45,6 +54,7 @@
     cursor: pointer;
     color: var(--text-color);
     margin-top: 1vh;
+    padding: 1vh;
     border-radius: 50%;
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
