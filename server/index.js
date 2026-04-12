@@ -12,10 +12,7 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/portfolio';
 
 // ────────────────────────────── Middleware ──────────────────────────────────
-app.use(cors({
-  origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173',
-  methods: ['GET', 'POST'],
-}));
+app.use(cors());
 app.use(express.json());
 
 // ────────────────────────────── Routes ──────────────────────────────────────
