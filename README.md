@@ -2,6 +2,9 @@
 
 A professional portfolio website for a software engineer, built with React and Node.js. This project features a modern, responsive design with smooth animations, 3D model integration, and a full-stack contact form with email notifications.
 
+#LiveDemo
+https://mauliksharma-portfolio.netlify.app/
+
 ## Features
 
 - **Modern UI/UX**: Clean, responsive design with smooth scrolling and hover effects.
