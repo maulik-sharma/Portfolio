@@ -81,7 +81,8 @@ export default function Contact() {
         setStatus(STATUS.ERROR);
         setServerMsg(data.error || 'Something went wrong. Please try again.');
       }
-    } catch {
+    } catch(error) {
+      console.log(error)
       setStatus(STATUS.ERROR);
       setServerMsg('Unable to reach the server. Please try again later.');
     }
