@@ -66,6 +66,8 @@ export default function Contact() {
     setServerMsg('');
 
     try {
+      // The backend handles email notification as a non-blocking background task.
+      // This ensures the user gets a fast response as soon as the database save is confirmed.
       const res = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -81,7 +83,7 @@ export default function Contact() {
         setStatus(STATUS.ERROR);
         setServerMsg(data.error || 'Something went wrong. Please try again.');
       }
-    } catch(error) {
+    } catch (error) {
       console.log(error)
       setStatus(STATUS.ERROR);
       setServerMsg('Unable to reach the server. Please try again later.');

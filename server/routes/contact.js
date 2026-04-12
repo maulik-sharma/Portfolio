@@ -34,7 +34,8 @@ router.post('/', async (req, res) => {
         },
       });
 
-      await transporter.sendMail({
+      // Trigger email sending in the background (Non-blocking)
+      transporter.sendMail({
         from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
         to: process.env.NOTIFY_EMAIL,
         subject: `New message from ${name}`,
@@ -47,6 +48,8 @@ router.post('/', async (req, res) => {
           <hr/>
           <small>Submitted at: ${new Date().toLocaleString()}</small>
         `,
+      }).catch(err => {
+        console.error('[Background SMTP Error]', err.message);
       });
     }
 
