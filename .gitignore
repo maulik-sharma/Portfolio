@@ -7,10 +7,34 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+client/logs
+client/*.log
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/pnpm-debug.log*
+client/lerna-debug.log*
+
+server/logs
+server/*.log
+server/npm-debug.log*
+server/yarn-debug.log*
+server/yarn-error.log*
+server/pnpm-debug.log*
+server/lerna-debug.log*
+
+*.local
 dist
 dist-ssr
-*.local
+
+node_modules
+client/dist
+client/dist-ssr
+server/*.local
+client/*.local
+server/.env
+public/node_modules
+server/node_modules
 
 # Editor directories and files
 .vscode/*

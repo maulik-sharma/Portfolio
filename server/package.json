@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend for Portfolio",
+  "homepage": "https://github.com/maulik-sharma/Portfolio#readme",
+  "bugs": {
+    "url": "https://github.com/maulik-sharma/Portfolio/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maulik-sharma/Portfolio.git"
+  },
+  "license": "ISC",
+  "author": "Maulik Sharma",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node .\\index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.4.1",
+    "nodemailer": "^8.0.5"
+  }
+}

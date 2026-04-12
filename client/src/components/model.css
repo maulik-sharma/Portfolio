@@ -1,0 +1,15 @@
+.model{
+    height: 85vh;
+}
+
+@media (max-width: 768px) {
+    .model {
+        height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .model {
+        height: 50vh;
+    }
+}
