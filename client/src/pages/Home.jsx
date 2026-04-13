@@ -4,6 +4,12 @@ import SkillBars from '../components/SkillBars.jsx';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
+try{
+  const wakeup = fetch(`${API_URL}/api/health`);
+}catch(err){
+  console.log(err);
+}
+
 const sectionVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
