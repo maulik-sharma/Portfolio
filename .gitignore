@@ -36,6 +36,10 @@ server/.env
 public/node_modules
 server/node_modules
 
+# Docker
+.env
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
