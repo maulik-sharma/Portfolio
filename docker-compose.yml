@@ -1,23 +1,4 @@
 services:
-  # ── MongoDB ───────────────────────────────────────────────────────────────────
-  mongo:
-    image: mongo:7
-    container_name: mongo
-    restart: unless-stopped
-    hostname: mongo
-    networks:
-      - portfolio
-    volumes:
-      - mongo_data:/data/db
-    ports:
-      - "${MONGO_PORT:-27017}:27017"
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
-
   # ── Server (Express API) ──────────────────────────────────────────────────────
   server:
     image: ghcr.io/maulik-sharma/portfolio-server:latest
@@ -35,9 +16,6 @@ services:
       - EMAIL_USER=${EMAIL_USER}
       - EMAIL_PASS=${EMAIL_PASS}
       - NOTIFY_EMAIL=${NOTIFY_EMAIL}
-    depends_on:
-      mongo:
-        condition: service_healthy
 
   # ── Client (React SPA) ────────────────────────────────────────────────────────
   client:
@@ -49,13 +27,9 @@ services:
     restart: unless-stopped
     ports:
       - "${CLIENT_PORT:-3000}:80"
-    depends_on:
-      - server
 
-volumes:
-  mongo_data:
 
 networks:
   portfolio:
     name: portfolio
-    external: false
+    driver: bridge
