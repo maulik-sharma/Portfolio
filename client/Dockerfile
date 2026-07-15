@@ -8,7 +8,7 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 # Accept API URL at build time (baked into the Vite bundle)
-ARG VITE_API_URL=http://server:5000
+ARG VITE_API_URL=https://mauliksharma.org
 ENV VITE_API_URL=$VITE_API_URL
 
 # Copy source and build
