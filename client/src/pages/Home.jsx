@@ -1,14 +1,10 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import "./Home.css";
 import SkillBars from '../components/SkillBars.jsx';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-
-try{
-  const wakeup = fetch(`${API_URL}/api/health`);
-}catch(err){
-  console.log(err);
-}
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -38,8 +34,18 @@ const rowVariants = {
 };
 
 export default function Home() {
+  useDocumentMeta({
+    title: 'Maulik Sharma — Developer & Engineer',
+    description: 'Portfolio of Maulik Sharma — Computer Science & Engineering developer specializing in full-stack development, systems programming, blockchain, and machine learning.',
+  });
+
+  // Wake up the backend server (moved from module scope to avoid blocking import)
+  useEffect(() => {
+    fetch(`${API_URL}/api/health`).catch(() => {});
+  }, []);
+
   return (
-    <div className="home-container">
+    <main className="home-container">
       {/* Row 1, Col 1: About */}
       <section className="grid-item about-section" id="about">
         <h1>About</h1>
@@ -71,7 +77,7 @@ export default function Home() {
 
       {/* Row 2, Col 1: Achievements */}
       <section className="grid-item achievements-section" id="achievements">
-        <h1>Achievements</h1>
+        <h2>Achievements</h2>
       </section>
 
       {/* Row 2, Col 2: Details Context (Experience, Skills, Languages) */}
@@ -98,13 +104,13 @@ export default function Home() {
             <motion.tbody variants={tableVariants}>
               <motion.tr variants={rowVariants}>
                 <td>Secondary Education (Class X)</td>
-                <td>St. Teresa’s School, Jaipur</td>
+                <td>St. Teresa's School, Jaipur</td>
                 <td className="align-right">2021</td>
               </motion.tr>
 
               <motion.tr variants={rowVariants}>
                 <td>Senior Secondary Education (Class XII)</td>
-                <td>St. Teresa’s School, Jaipur</td>
+                <td>St. Teresa's School, Jaipur</td>
                 <td className="align-right">2023</td>
               </motion.tr>
               <motion.tr variants={rowVariants}>
@@ -194,6 +200,6 @@ export default function Home() {
         </div>
       </section>
 
-    </div>
+    </main>
 );
 }

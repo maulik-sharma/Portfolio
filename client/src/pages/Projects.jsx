@@ -1,10 +1,6 @@
 import { motion } from "framer-motion";
 import "./Projects.css";
-import httpserver from "/httpserver.jpg"
-import svdanalyzer from "/svd.jpg"
-import blocklance from "/blocklance.jpg"
-import dbms from "/dbms.jpg"
-import attendance from "/attendance.jpg"
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 const containerVariants = {
   hidden: {},
@@ -30,7 +26,7 @@ const projects = [
     description: "A lightweight, multi-threaded HTTP/1.1 server built in modern C++ from scratch. Utilizes a custom thread pool for high-concurrency, low-latency request handling.",
     tags: ["C++", "Sockets", "POSIX Threads"],
     link1: "https://github.com/maulik-sharma/Minor_Project_PR1103",
-    image: httpserver
+    image: "/httpserver.jpg"
   },
   {
     title: "Visual SVD Analyzer",
@@ -40,7 +36,7 @@ const projects = [
     tags: ["Python", "Flask", "NumPy", "SVD", "Computer Vision"],
     link1: "https://github.com/Aman018-gif/svd-eigenfaces-image-reconstruction",
     link2: "https://svd-eigenfaces-image-reconstruction.onrender.com/",
-    image: svdanalyzer
+    image: "/svd.jpg"
   },
     {
     title: "Attendance Monitoring",
@@ -49,7 +45,7 @@ const projects = [
     description: "An edge-computed facial recognition attendance system that combines OpenCV with a Raspberry Pi and a scalable FastAPI backend for seamless identity verification.",
     tags: ["Python", "OpenCV", "FastAPI", "Raspberry Pi", "PostgreSQL"],
     link1: "https://github.com/maulik-sharma/Attendance-Monitoring",
-    image: attendance
+    image: "/attendance.jpg"
   },
   {
     title: "BlockLance",
@@ -58,7 +54,7 @@ const projects = [
     description: "A DApp for decentralized freelancer reputation. It uses Blockchain to store immutable performance data and an off-chain Machine Learning (ML) oracle to calculate an objective 'Trust Factor'. This provides employers with a verifiable, mathematically grounded metric for hiring.",
     tags: ["Solidity", "Web3.js", "React", "Node.js", "Machine Learning"],
     link1: "https://github.com/maulik-sharma/BlockLance",
-    image: blocklance
+    image: "/blocklance.jpg"
   },
   {
     title: "Alumni Management",
@@ -67,13 +63,18 @@ const projects = [
     description: "This project is a full-stack Alumni Management System that combines a CustomTkinter GUI with a FastAPI backend to facilitate professional networking through real-time messaging and mentorship tracking.",
     tags: ["Python (FastAPI & CustomTkinter)", "Asynchronous Programming", " WebSockets", "JWT"],
     link1: "https://github.com/maulik-sharma/Alumni-management",
-    image: dbms
+    image: "/dbms.jpg"
   }
 ];
 
 function Projects() {
+  useDocumentMeta({
+    title: 'Projects — Maulik Sharma',
+    description: 'Explore projects by Maulik Sharma including HTTP servers, SVD analyzers, facial recognition systems, blockchain dApps, and full-stack applications.',
+  });
+
   return (
-    <div className="projects-container">
+    <main className="projects-container">
 
       <motion.div
         className="projects-heading"
@@ -98,7 +99,15 @@ function Projects() {
             {/* Image area */}
             <div className="project-image-wrapper">
               {project.image
-                ? <img src={project.image} alt={project.title} className="project-image" />
+                ? <img
+                    src={project.image}
+                    alt={project.title}
+                    className="project-image"
+                    loading="lazy"
+                    decoding="async"
+                    width="600"
+                    height="338"
+                  />
                 : <div className="project-image-placeholder">
                     <span>No preview available</span>
                   </div>
@@ -138,7 +147,7 @@ function Projects() {
         ))}
       </motion.div>
 
-    </div>
+    </main>
   );
 }
 

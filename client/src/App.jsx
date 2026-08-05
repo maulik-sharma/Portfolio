@@ -1,13 +1,15 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import './App.css'
 import Header from "./components/header.jsx";
 import Footer from './components/footer.jsx'
 import Model from './components/model.jsx';
-import Home from './pages/Home.jsx';
-import Projects from './pages/Projects.jsx';
-import Contact from './pages/Contact.jsx';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import StatusFooter from './components/StatusFooter.jsx';
+
+// Route-level code splitting: each page is loaded on demand
+const Home = lazy(() => import('./pages/Home.jsx'));
+const Projects = lazy(() => import('./pages/Projects.jsx'));
+const Contact = lazy(() => import('./pages/Contact.jsx'));
 
 function App() {
   const [isNavHovered, setIsNavHovered] = useState(false);
@@ -17,11 +19,13 @@ function App() {
       <div>
         <Header setIsNavHovered={setIsNavHovered} />
         <Model isNavHovered={isNavHovered} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <Suspense fallback={<div className="page-loading" aria-label="Loading page content" />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </Suspense>
         <Footer />
         <StatusFooter />
       </div>

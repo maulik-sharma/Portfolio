@@ -1,5 +1,5 @@
 import './footer.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
     return (
@@ -9,16 +9,16 @@ export default function Footer() {
             <div className="footer-item" style={{paddingRight: "20%"}}>
                 <h2>Contact</h2>
                     <div>
-                        <a className="label" href='mailto:maulik.jaipur@gmail.com' target='_blank'>Email</a>
-                        <a className="value" href='mailto:maulik.jaipur@gmail.com' target='_blank'>maulik.jaipur@gmail.com</a>
+                        <a className="label" href='mailto:maulik.jaipur@gmail.com' target='_blank' rel="noopener noreferrer">Email</a>
+                        <a className="value" href='mailto:maulik.jaipur@gmail.com' target='_blank' rel="noopener noreferrer">maulik.jaipur@gmail.com</a>
                     </div>
                     <div>
-                        <Link className="label" to='https://www.linkedin.com/in/maulik-sharma-0b5989352' target='_blank'>Linkedin</Link>
-                        <Link className="value" to='https://www.linkedin.com/in/maulik-sharma-0b5989352' target='_blank'>maulik-sharma</Link>
+                        <a className="label" href='https://www.linkedin.com/in/maulik-sharma-0b5989352' target='_blank' rel="noopener noreferrer">Linkedin</a>
+                        <a className="value" href='https://www.linkedin.com/in/maulik-sharma-0b5989352' target='_blank' rel="noopener noreferrer">maulik-sharma</a>
                     </div>
                     <div>
-                        <Link className="label" to='https://github.com/maulik-sharma' target='_blank'>Github</Link>
-                        <Link className="value" to='https://github.com/maulik-sharma' target='_blank'>maulik-sharma</Link>
+                        <a className="label" href='https://github.com/maulik-sharma' target='_blank' rel="noopener noreferrer">Github</a>
+                        <a className="value" href='https://github.com/maulik-sharma' target='_blank' rel="noopener noreferrer">maulik-sharma</a>
                     </div>
 
             </div>

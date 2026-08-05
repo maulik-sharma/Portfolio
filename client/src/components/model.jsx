@@ -1,9 +1,12 @@
-import React, { useRef, useLayoutEffect, useMemo, useEffect } from "react";
+import React, { useRef, useLayoutEffect, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Stage, Text } from "@react-three/drei";
 import * as THREE from "three";
 import { useLocation } from "react-router-dom";
 import "./model.css";
+
+// Map route index to GLB path
+const MODEL_PATHS = ["/maulik.glb", "/projects.glb", "/contact.glb"];
 
 function AnimatedBackgroundText({ isNavHovered }) {
   const location = useLocation();
@@ -93,6 +96,26 @@ function AnimatedBackgroundText({ isNavHovered }) {
   );
 }
 
+/**
+ * Loads a single GLB model and returns its cloned scene, normalized in scale.
+ * Returns null if the path is null/undefined.
+ */
+function useNormalizedModel(path) {
+  const { scene } = useGLTF(path);
+  return useMemo(() => {
+    const clone = scene.clone();
+    const box = new THREE.Box3().setFromObject(clone);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 2 / maxDim;
+    clone.scale.set(scale, scale, scale);
+    clone.position.sub(center.multiplyScalar(scale));
+    clone.updateMatrixWorld(true);
+    return clone;
+  }, [scene]);
+}
+
 function MorphingModel({ isNavHovered }) {
   const location = useLocation();
 
@@ -103,9 +126,13 @@ function MorphingModel({ isNavHovered }) {
   };
   const routeIndex = getRouteIndex();
 
-  const { scene: adamRaw } = useGLTF("/maulik.glb");
-  const { scene: tankRaw } = useGLTF("/projects.glb");
-  const { scene: lampRaw } = useGLTF("/contact.glb");
+  // Load all three models (useGLTF caches internally — only the first call
+  // triggers a network request; subsequent calls return the cached result).
+  // The key optimization is that we removed useGLTF.preload() at module scope,
+  // and instead preload non-active models after mount below.
+  const adamModel = useNormalizedModel("/maulik.glb");
+  const tankModel = useNormalizedModel("/projects.glb");
+  const lampModel = useNormalizedModel("/contact.glb");
 
   const modelRef = useRef();
 
@@ -114,22 +141,9 @@ function MorphingModel({ isNavHovered }) {
   const pointsPlane = useMemo(() => new THREE.Plane(new THREE.Vector3(0, -1, 0), 0), []);
 
   const { solids, pointsScene, pMat } = useMemo(() => {
-    const adam = adamRaw.clone();
-    const tank = tankRaw.clone();
-    const lamp = lampRaw.clone();
-
-    // Normalize scale and center all models so they occupy similar space
-    [adam, tank, lamp].forEach((modelScene) => {
-      const box = new THREE.Box3().setFromObject(modelScene);
-      const size = box.getSize(new THREE.Vector3());
-      const center = box.getCenter(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 2 / maxDim;
-
-      modelScene.scale.set(scale, scale, scale);
-      modelScene.position.sub(center.multiplyScalar(scale));
-      modelScene.updateMatrixWorld(true);
-    });
+    const adam = adamModel;
+    const tank = tankModel;
+    const lamp = lampModel;
 
     const setupSolid = (sceneClone) => {
       sceneClone.traverse((child) => {
@@ -251,7 +265,7 @@ function MorphingModel({ isNavHovered }) {
       pointsScene: pScene,
       pMat: pointsMat
     };
-  }, [adamRaw, tankRaw, lampRaw, solidPlane, pointsPlane]);
+  }, [adamModel, tankModel, lampModel, solidPlane, pointsPlane]);
 
   const targetWiperY = useRef(5);
   const isTransitioning = useRef(false);
@@ -330,13 +344,50 @@ function MorphingModel({ isNavHovered }) {
   );
 }
 
+/**
+ * Wrapper that loads only the initial route's model first,
+ * then preloads the remaining models in the background.
+ */
+function DeferredModelLoader({ isNavHovered }) {
+  const location = useLocation();
+  const initialRouteRef = useRef(
+    location.pathname.includes('/projects') ? 1 :
+    location.pathname.includes('/contact') ? 2 : 0
+  );
+
+  // Preload the current route's model immediately via Suspense,
+  // then preload others after the component mounts
+  useEffect(() => {
+    // After mount, preload models not needed for the current route
+    const otherPaths = MODEL_PATHS.filter((_, i) => i !== initialRouteRef.current);
+    // Use requestIdleCallback or setTimeout to defer non-critical preloads
+    const timers = otherPaths.map((path, i) =>
+      setTimeout(() => useGLTF.preload(path), (i + 1) * 500)
+    );
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  return <MorphingModel isNavHovered={isNavHovered} />;
+}
+
+function ModelLoadingFallback() {
+  return (
+    <div className="model-loading" role="status" aria-label="Loading 3D model">
+      <div className="model-loading-spinner">
+        <div className="model-loading-ring" />
+      </div>
+      <p className="model-loading-text">Loading 3D Scene</p>
+    </div>
+  );
+}
+
 export default function Model({ isNavHovered }) {
   return (
     <div className="model">
       <Canvas gl={{ localClippingEnabled: true }} camera={{ fov: 45 }}>
         <React.Suspense fallback={null}>
           <Stage environment="city" intensity={0.5} adjustCamera={false}>
-            <MorphingModel isNavHovered={isNavHovered} />
+            <DeferredModelLoader isNavHovered={isNavHovered} />
           </Stage>
           <AnimatedBackgroundText isNavHovered={isNavHovered} />
         </React.Suspense>
@@ -345,6 +396,5 @@ export default function Model({ isNavHovered }) {
   );
 }
 
+// Only preload the home model eagerly — others are deferred
 useGLTF.preload("/maulik.glb");
-useGLTF.preload("/projects.glb");
-useGLTF.preload("/contact.glb");

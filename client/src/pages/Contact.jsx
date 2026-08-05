@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import './Contact.css';
+import useDocumentMeta from '../hooks/useDocumentMeta.js';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -25,6 +26,11 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 const STATUS = { IDLE: 'idle', SENDING: 'sending', SUCCESS: 'success', ERROR: 'error' };
 
 export default function Contact() {
+  useDocumentMeta({
+    title: 'Contact — Maulik Sharma',
+    description: 'Get in touch with Maulik Sharma. Send a message for project inquiries, collaboration opportunities, or just to say hello.',
+  });
+
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState(STATUS.IDLE);
   const [serverMsg, setServerMsg] = useState('');
@@ -93,7 +99,7 @@ export default function Contact() {
   const isDisabled = status === STATUS.SENDING;
 
   return (
-    <div className="contact-container">
+    <main className="contact-container">
       {/* ── Left column — heading + info ── */}
       <motion.section
         className="contact-info"
@@ -213,6 +219,6 @@ export default function Contact() {
           )}
         </form>
       </motion.section>
-    </div>
+    </main>
   );
 }
