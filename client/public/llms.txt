@@ -1,0 +1,28 @@
+# Maulik Sharma
+
+> Maulik Sharma is a Computer Science & Engineering developer specializing in full-stack development, systems programming, blockchain, and machine learning. This is his personal portfolio website.
+
+Maulik is a B.Tech CSE student at JK Lakshmipat University, Jaipur. He has experience as a Backend Developer Intern at Keystocks OPC Pvt. Ltd. and a Software Development Intern at Khandelwal Agrawal & Co. His technical skills span C++, Python, JavaScript, React, Three.js, FastAPI, PostgreSQL, Solidity, and more.
+
+## Pages
+
+- [Home](https://mauliksharma.org/): About Maulik, his education, experience, skills, and achievements
+- [Projects](https://mauliksharma.org/projects): Portfolio of software projects including HTTP servers, SVD analyzers, facial recognition systems, blockchain dApps, and full-stack applications
+- [Contact](https://mauliksharma.org/contact): Contact form to reach Maulik for project inquiries or collaboration
+
+## Social Profiles
+
+- [GitHub](https://github.com/maulik-sharma): Open-source projects and code repositories
+- [LinkedIn](https://www.linkedin.com/in/maulik-sharma-0b5989352): Professional profile and networking
+
+## Projects
+
+- [Simple HTTP Server](https://github.com/maulik-sharma/Minor_Project_PR1103): A lightweight, multi-threaded HTTP/1.1 server built in modern C++ from scratch with a custom thread pool
+- [Visual SVD Analyzer](https://github.com/Aman018-gif/svd-eigenfaces-image-reconstruction): Interactive web app demonstrating image compression using Singular Value Decomposition
+- [Attendance Monitoring](https://github.com/maulik-sharma/Attendance-Monitoring): Edge-computed facial recognition attendance system using OpenCV, Raspberry Pi, and FastAPI
+- [BlockLance](https://github.com/maulik-sharma/BlockLance): Decentralized freelancer reputation DApp using Blockchain and ML-based trust scoring
+- [Alumni Management](https://github.com/maulik-sharma/Alumni-management): Full-stack Alumni Management System with CustomTkinter GUI, FastAPI backend, and WebSocket messaging
+
+## Optional
+
+- [Email](mailto:maulik.jaipur@gmail.com): Direct email contact

@@ -37,6 +37,7 @@ export default function Home() {
   useDocumentMeta({
     title: 'Maulik Sharma — Developer & Engineer',
     description: 'Portfolio of Maulik Sharma — Computer Science & Engineering developer specializing in full-stack development, systems programming, blockchain, and machine learning.',
+    path: '/',
   });
 
   // Wake up the backend server (moved from module scope to avoid blocking import)

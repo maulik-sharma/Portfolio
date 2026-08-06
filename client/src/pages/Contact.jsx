@@ -29,6 +29,7 @@ export default function Contact() {
   useDocumentMeta({
     title: 'Contact — Maulik Sharma',
     description: 'Get in touch with Maulik Sharma. Send a message for project inquiries, collaboration opportunities, or just to say hello.',
+    path: '/contact',
   });
 
   const [form, setForm] = useState({ name: '', email: '', message: '' });

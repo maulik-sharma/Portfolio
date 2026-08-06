@@ -71,6 +71,7 @@ function Projects() {
   useDocumentMeta({
     title: 'Projects — Maulik Sharma',
     description: 'Explore projects by Maulik Sharma including HTTP servers, SVD analyzers, facial recognition systems, blockchain dApps, and full-stack applications.',
+    path: '/projects',
   });
 
   return (
