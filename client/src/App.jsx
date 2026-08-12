@@ -21,7 +21,7 @@ function App() {
     <BrowserRouter>
       <div>
         <Header setIsNavHovered={setIsNavHovered} />
-        <Suspense fallback={null}>
+        <Suspense fallback={<div className="model" />}>
           <Model isNavHovered={isNavHovered} />
         </Suspense>
         <Suspense fallback={<div className="page-loading" aria-label="Loading page content" />}>
